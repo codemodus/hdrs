@@ -4,6 +4,7 @@ package hdrs
 const (
 	Origin = "Origin"
 
-	AccessControlAllowMethod = "Access-Control-Allow-Methods"
-	AccessControlAllowOrigin = "Access-Control-Allow-Origin"
+	AccessControlAllowHeaders = "Access-Control-Allow-Headers"
+	AccessControlAllowMethod  = "Access-Control-Allow-Methods"
+	AccessControlAllowOrigin  = "Access-Control-Allow-Origin"
 )
