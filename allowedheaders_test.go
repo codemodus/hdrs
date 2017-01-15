@@ -87,7 +87,7 @@ func TestAllowedHeadersString(t *testing.T) {
 			}
 
 			if !found {
-				t.Errorf("got %s, without %s @%s", h.String(), k, stage)
+				t.Errorf("got %s, want %s @%s", "", k, stage)
 			}
 		}
 	}
