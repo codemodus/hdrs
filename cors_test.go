@@ -11,29 +11,29 @@ func TestCORSOrigins(t *testing.T) {
 	bsite := "http://bad.example"
 
 	d := []struct {
-		origin string
-		method string
-		code   int
+		origin  string
+		method  string
+		allowed string
 	}{
-		{esite, http.MethodConnect, http.StatusTeapot},
-		{esite, http.MethodDelete, http.StatusTeapot},
-		{esite, http.MethodGet, http.StatusTeapot},
-		{esite, http.MethodHead, http.StatusTeapot},
-		{esite, http.MethodOptions, http.StatusTeapot},
-		{esite, http.MethodPatch, http.StatusTeapot},
-		{esite, http.MethodPost, http.StatusTeapot},
-		{esite, http.MethodPut, http.StatusTeapot},
-		{esite, http.MethodTrace, http.StatusTeapot},
+		{esite, http.MethodConnect, esite},
+		{esite, http.MethodDelete, esite},
+		{esite, http.MethodGet, esite},
+		{esite, http.MethodHead, esite},
+		{esite, http.MethodOptions, esite},
+		{esite, http.MethodPatch, esite},
+		{esite, http.MethodPost, esite},
+		{esite, http.MethodPut, esite},
+		{esite, http.MethodTrace, esite},
 
-		{bsite, http.MethodConnect, http.StatusForbidden},
-		{bsite, http.MethodDelete, http.StatusForbidden},
-		{bsite, http.MethodGet, http.StatusForbidden},
-		{bsite, http.MethodHead, http.StatusForbidden},
-		{bsite, http.MethodOptions, http.StatusForbidden},
-		{bsite, http.MethodPatch, http.StatusForbidden},
-		{bsite, http.MethodPost, http.StatusForbidden},
-		{bsite, http.MethodPut, http.StatusForbidden},
-		{bsite, http.MethodTrace, http.StatusForbidden},
+		{bsite, http.MethodConnect, ""},
+		{bsite, http.MethodDelete, ""},
+		{bsite, http.MethodGet, ""},
+		{bsite, http.MethodHead, ""},
+		{bsite, http.MethodOptions, ""},
+		{bsite, http.MethodPatch, ""},
+		{bsite, http.MethodPost, ""},
+		{bsite, http.MethodPut, ""},
+		{bsite, http.MethodTrace, ""},
 	}
 
 	ao := NewAllowedOrigins()
@@ -52,19 +52,8 @@ func TestCORSOrigins(t *testing.T) {
 
 		mw(http.RedirectHandler("/", http.StatusTeapot)).ServeHTTP(w, r)
 
-		gotCode := w.Code
-		wantCode := v.code
-		if gotCode != wantCode {
-			t.Errorf("got %d, want %d", gotCode, wantCode)
-			continue
-		}
-
-		if wantCode == http.StatusForbidden {
-			continue
-		}
-
 		got := w.Header().Get(AccessControlAllowOrigin)
-		want := esite
+		want := v.allowed
 		if got != want {
 			t.Errorf("got %s, want %s", got, want)
 		}
