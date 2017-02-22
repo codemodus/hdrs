@@ -11,9 +11,8 @@ func CORSOrigins(origs Allower) func(http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			o := r.Header.Get(Origin)
 
-			if !origs.IsAllowed(o) {
-				stts := http.StatusForbidden
-				http.Error(w, http.StatusText(stts), stts)
+			if o == "" || !origs.IsAllowed(o) {
+				next.ServeHTTP(w, r)
 				return
 			}
 
