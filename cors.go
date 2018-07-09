@@ -64,6 +64,8 @@ func CORSMethods(s Stringer) func(http.Handler) http.Handler {
 	}
 }
 
+// TODO: CORSMethodsFromDef(definition string) func(http.Handler) http.Handler
+
 // OptionsHalt ...
 func OptionsHalt(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
