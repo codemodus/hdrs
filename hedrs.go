@@ -1,5 +1,7 @@
 package hedrs
 
+import "net/http"
+
 // request constants ...
 const (
 	Accept                      = "Accept"
@@ -26,4 +28,18 @@ const (
 	AccessControlAllowOrigin      = "Access-Control-Allow-Origin"
 	AccessControlExposeHeaders    = "Access-Control-Expose-Headers"
 	AccessControlMaxAge           = "Access-Control-Max-Age"
+)
+
+var (
+	// AllMethods ...
+	AllMethods = []string{
+		http.MethodOptions,
+		http.MethodGet,
+		http.MethodPut,
+		http.MethodHead,
+		http.MethodPost,
+		http.MethodDelete,
+		http.MethodPatch,
+		http.MethodTrace,
+	}
 )

@@ -2,12 +2,12 @@ package hedrs
 
 import "testing"
 
-func TestAllowedOriginsAdd(t *testing.T) {
+func TestAllowedRegistryAdd(t *testing.T) {
 	d1 := "http://test1.example"
 	d2 := "http://test2.example"
 	d3 := "http://test3.example"
 
-	o := NewAllowedOrigins()
+	o := NewAllowedRegistry()
 	mLen := len(o.hosts)
 
 	d := []struct {
@@ -34,12 +34,12 @@ func TestAllowedOriginsAdd(t *testing.T) {
 	}
 }
 
-func TestAllowedOriginsRmv(t *testing.T) {
+func TestAllowedRegistryRmv(t *testing.T) {
 	d1 := "http://test1.example"
 	d2 := "http://test2.example"
 	d3 := "http://test3.example"
 
-	o := NewAllowedOrigins(d1, d2, d3)
+	o := NewAllowedRegistry(d1, d2, d3)
 	mLen := len(o.hosts)
 
 	d := []struct {
@@ -65,11 +65,11 @@ func TestAllowedOriginsRmv(t *testing.T) {
 	}
 }
 
-func TestAllowedOriginsIsAllowed(t *testing.T) {
+func TestAllowedRegistryIsAllowed(t *testing.T) {
 	dom1 := "http://test1.example:12345"
 	dom2 := "https://www.test2.example"
 
-	o := NewAllowedOrigins(dom1, dom2)
+	o := NewAllowedRegistry(dom1, dom2)
 
 	d := []struct {
 		dom string

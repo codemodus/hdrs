@@ -36,7 +36,7 @@ func TestCORSOrigins(t *testing.T) {
 		{bsite, http.MethodTrace, ""},
 	}
 
-	ao := NewAllowedOrigins()
+	ao := NewAllowedRegistry()
 	mw := CORSOrigins(ao)
 
 	for _, v := range d {
@@ -78,7 +78,7 @@ func TestCORSHeaders(t *testing.T) {
 		{http.MethodTrace, ""},
 	}
 
-	ah := NewAllowedHeaders(ehdr)
+	ah := NewValues(ehdr)
 	mw := CORSHeaders(ah)
 
 	for _, v := range d {
